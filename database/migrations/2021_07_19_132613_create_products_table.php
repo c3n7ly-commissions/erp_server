@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
       $table->unsignedFloat('purchase_price');
       $table->unsignedFloat('profit_margin');
       $table->string('status')->default(Product::INACTIVE);
-      $table->text('status_reason');
+      $table->text('status_reason')->nullable();
       $table->unsignedBigInteger('division_id');
       $table->unsignedBigInteger('tax_id');
       $table->unsignedBigInteger('category_id');

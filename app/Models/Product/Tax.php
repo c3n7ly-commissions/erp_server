@@ -18,4 +18,10 @@ class Tax extends Model
     'name',
     'value'
   ];
+
+
+  public function products()
+  {
+    return $this->hasMany(Product::class);
+  }
 }

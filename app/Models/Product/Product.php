@@ -38,4 +38,29 @@ class Product extends Model
     "atomic_unit_id",
     "image"
   ];
+
+  public function tax()
+  {
+    return $this->belongsTo(Tax::class);
+  }
+
+  public function category()
+  {
+    return $this->belongsTo(Category::class);
+  }
+
+  public function subCategory()
+  {
+    return $this->belongsTo(SubCategory::class);
+  }
+
+  public function bulkUnit()
+  {
+    return $this->belongsTo(Unit::class, "bulk_unit_id");
+  }
+
+  public function atomicUnit()
+  {
+    return $this->belongsTo(Unit::class, "atomic_unit_id");
+  }
 }

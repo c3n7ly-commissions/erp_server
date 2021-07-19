@@ -18,4 +18,15 @@ class Unit extends Model
     'name',
     'description'
   ];
+
+
+  public function productsBulk()
+  {
+    return $this->hasMany(Product::class, "bulk_unit_id");
+  }
+
+  public function productsAtomic()
+  {
+    return $this->hasMany(Product::class, "atomic_unit_id");
+  }
 }

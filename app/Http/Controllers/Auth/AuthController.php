@@ -50,7 +50,7 @@ class AuthController extends Controller
   public function login(Request $request)
   {
     $rules = [
-      "email" => "requried|string",
+      "email" => "required|string",
       "password" => "required|string"
     ];
 

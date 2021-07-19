@@ -9,7 +9,6 @@ use App\Models\Product\SubCategory;
 use App\Models\Product\Tax;
 use App\Models\Product\Unit;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 
 class ProductFactory extends Factory
 {
@@ -28,17 +27,17 @@ class ProductFactory extends Factory
   public function definition()
   {
     $bulk_unit = Unit::all()->random();
-    $atomic_unit = Unit::all()->except($bulk_unit->id)->random;
+    $atomic_unit = Unit::all()->except($bulk_unit->id)->random();
     return [
       "name" => $this->faker->word(),
       "code" => $this->faker->unique->isbn10(),
-      "weight" => $this->faker->randomFloat(),
-      "bulk_selling_price" => $bulk_price = $this->faker->randomFloat(2),
-      "conversion" => $this->faker->randomFloat(2),
-      "atomic_selling_price" => $this->faker->randomFloat(2, $bulk_price),
-      "amount_before_tax" => $this->faker->randomFloat(2),
-      "purchase_price" => $this->faker->randomFloat(2),
-      "profit_margin" => $this->faker->randomFloat(2),
+      "weight" => $this->faker->randomFloat(2, 1, 1_000_000),
+      "bulk_selling_price" => $bulk_price = $this->faker->randomFloat(2, 1, 1_000_000),
+      "conversion" => $this->faker->randomFloat(2, 1, 1_000_000),
+      "atomic_selling_price" => $this->faker->randomFloat(2, $bulk_price, 2_000_000),
+      "amount_before_tax" => $this->faker->randomFloat(2, 1, 1_000_000),
+      "purchase_price" => $this->faker->randomFloat(2, 1, 1_000_000),
+      "profit_margin" => $this->faker->randomFloat(2, 1, 1_000),
       "status" =>
       $status = $this->faker->randomElement([Product::ACTIVE, Product::INACTIVE, Product::REJECTED]),
       "status_reason" => $status == Product::REJECTED ? $this->faker->paragraph() : null,

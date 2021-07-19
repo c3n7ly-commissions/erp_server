@@ -2,17 +2,46 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company\Division;
+use App\Models\Product\Category;
+use App\Models\Product\Product;
+use App\Models\Product\SubCategory;
+use App\Models\Product\Tax;
+use App\Models\Product\Unit;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        // \App\Models\User::factory(10)->create();
-    }
+  /**
+   * Seed the application's database.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    DB::statement("SET FOREIGN_KEY_CHECKS = 0");
+
+    Division::truncate();
+    Category::truncate();
+    SubCategory::truncate();
+    Tax::truncate();
+    Unit::truncate();
+    Product::truncate();
+
+
+    $divisionQt = 10;
+    $categoryQt = 50;
+    $subCategoryQt = 100;
+    $taxQt = 100;
+    $unitQt = 50;
+    $productQt = 300;
+
+    Division::factory($divisionQt)->create();
+    Category::factory($categoryQt)->create();
+    SubCategory::factory($subCategoryQt)->create();
+    Tax::factory($taxQt)->create();
+    Unit::factory($unitQt)->create();
+    Product::factory($productQt)->create();
+  }
 }

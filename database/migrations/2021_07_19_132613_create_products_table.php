@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
       $table->unsignedFloat('profit_margin');
       $table->string('status')->default(Product::INACTIVE);
       $table->text('status_reason');
+      $table->unsignedBigInteger('division_id');
       $table->unsignedBigInteger('tax_id');
       $table->unsignedBigInteger('category_id');
       $table->unsignedBigInteger('sub_category_id');
@@ -36,6 +37,7 @@ class CreateProductsTable extends Migration
       $table->timestamps();
       $table->softDeletes();
 
+      $table->foreign('division_id')->references('id')->on('divisions');
       $table->foreign('tax_id')->references('id')->on('taxes');
       $table->foreign('category_id')->references('id')->on('categories');
       $table->foreign('sub_category_id')->references('id')->on('sub_categories');

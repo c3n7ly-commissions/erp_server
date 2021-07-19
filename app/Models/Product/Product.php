@@ -30,6 +30,7 @@ class Product extends Model
     "profit_margin",
     "status",
     "status_reason",
+    "division_id",
     "tax_id",
     "category_id",
     "sub_category_id",

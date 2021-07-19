@@ -16,7 +16,7 @@ class CreateTaxesTable extends Migration
     Schema::create('taxes', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      $table->float('value', 8, 2, true);
+      $table->unsignedFloat('value');
       $table->timestamps();
       $table->softDeletes();
     });

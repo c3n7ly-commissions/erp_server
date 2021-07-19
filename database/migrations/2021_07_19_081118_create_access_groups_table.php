@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePageGroupsTable extends Migration
+class CreateAccessGroupsTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePageGroupsTable extends Migration
    */
   public function up()
   {
-    Schema::create('page_groups', function (Blueprint $table) {
+    Schema::create('access_groups', function (Blueprint $table) {
       $table->id();
       $table->string('name')->unique();
       $table->timestamps();
@@ -28,6 +28,6 @@ class CreatePageGroupsTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('page_groups');
+    Schema::dropIfExists('access_groups');
   }
 }

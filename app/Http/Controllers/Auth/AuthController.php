@@ -3,83 +3,89 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
   /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
-    //
-  }
-
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-    //
-  }
-
-  /**
-   * Store a newly created resource in storage.
+   * Register a new user
    *
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function register(Request $request)
   {
-    //
+    $rules = [
+      "name" => "required|string",
+      "email" => "requried|string|unique:users,email",
+      "password" => "required|string|confirmed"
+    ];
+
+    $fields = $request->validate($rules);
+
+    $user = User::create([
+      "name" => $fields['name'],
+      "email" => $fields['email'],
+      "password" => Hash::make($fields['password'])
+    ]);
+
+    $token = $user->createToken('authtoken')->plainTextToken;
+
+    $response = [
+      "user" => $user,
+      "token" => $token
+    ];
+
+    return response($response, 201);
   }
 
   /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-    //
-  }
-
-  /**
-   * Update the specified resource in storage.
+   * Authenticate a new user
    *
    * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
+  public function login(Request $request)
   {
-    //
+    $rules = [
+      "email" => "requried|string",
+      "password" => "required|string"
+    ];
+
+    $fields = $request->validate($rules);
+
+    $user = User::where('email', $fields['email'])->first();
+    if (!$user || !Hash::check($fields['password'], $user->password)) {
+      return response([
+        'message' => 'invalid credentials'
+      ], 401);
+    }
+
+    $token = $user->createToken('authtoken')->plainTextToken;
+
+    $response = [
+      "user" => $user,
+      "token" => $token
+    ];
+
+    return response($response, 200);
   }
 
   /**
-   * Remove the specified resource from storage.
+   * Logout user
    *
-   * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function logout(Request $request)
   {
-    //
+    $request->user()->tokens()->delete();
+
+    $message = [
+      "message" => "logged_out"
+    ];
+
+    return response($message, 200);
   }
 }

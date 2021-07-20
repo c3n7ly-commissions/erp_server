@@ -2,6 +2,7 @@
 
 namespace App\Models\Company;
 
+use App\Transformers\Company\BranchTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Branch extends Model
 {
   use HasFactory, SoftDeletes;
+
+  public $transformer = BranchTransformer::class;
 
   protected $dates = [
     'deleted_at'
@@ -20,7 +23,6 @@ class Branch extends Model
     "telephone",
     "postal_address",
     "physical_address",
-    "status",
     "division_id"
   ];
 

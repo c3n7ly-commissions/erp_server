@@ -33,7 +33,18 @@ class DivisionTransformer extends TransformerAbstract
     public function transform(Division $division)
     {
         return [
-            "name" => (string)$division->name
+            "id" => (int)$division->id,
+            "name" => (string)$division->name,
+            "created_at" => (string)$division->created_at,
+            "updated_at" => (string)$division->updated_at,
+            "deleted_at" => (string)$division->deleted_at,
+
+            "links"  => [
+                [
+                    'rel' => "self",
+                    "href" => route("divisions.show", $division->id)
+                ]
+            ]
         ];
     }
 }

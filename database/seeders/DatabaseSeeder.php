@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company\Branch;
 use App\Models\Company\Division;
 use App\Models\Product\Category;
 use App\Models\Product\Product;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
     DB::statement("SET FOREIGN_KEY_CHECKS = 0");
 
     Division::truncate();
+    Branch::truncate();
     Category::truncate();
     SubCategory::truncate();
     Tax::truncate();
@@ -31,6 +33,7 @@ class DatabaseSeeder extends Seeder
 
 
     $divisionQt = 10;
+    $branchQt = 100;
     $categoryQt = 50;
     $subCategoryQt = 100;
     $taxQt = 100;
@@ -38,6 +41,7 @@ class DatabaseSeeder extends Seeder
     $productQt = 300;
 
     Division::factory($divisionQt)->create();
+    Branch::factory($branchQt)->create();
     Category::factory($categoryQt)->create();
     SubCategory::factory($subCategoryQt)->create();
     Tax::factory($taxQt)->create();

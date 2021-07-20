@@ -9,6 +9,7 @@ use App\Models\Product\Product;
 use App\Models\Product\SubCategory;
 use App\Models\Product\Tax;
 use App\Models\Product\Unit;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
   {
     DB::statement("SET FOREIGN_KEY_CHECKS = 0");
 
+    User::truncate();
     Division::truncate();
     Branch::truncate();
     Category::truncate();
@@ -31,7 +33,7 @@ class DatabaseSeeder extends Seeder
     Unit::truncate();
     Product::truncate();
 
-
+    $userQt = 50;
     $divisionQt = 10;
     $branchQt = 100;
     $categoryQt = 50;
@@ -40,6 +42,7 @@ class DatabaseSeeder extends Seeder
     $unitQt = 50;
     $productQt = 300;
 
+    User::factory($userQt)->create();
     Division::factory($divisionQt)->create();
     Branch::factory($branchQt)->create();
     Category::factory($categoryQt)->create();

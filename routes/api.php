@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Company\BranchController;
 use App\Http\Controllers\Company\DivisionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
   Route::resource('divisions', DivisionController::class)->except([
     "create", "edit"
+  ]);
+
+  Route::resource('branches', BranchController::class)->only([
+    "index", "show"
   ]);
 });
 

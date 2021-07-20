@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Company;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use App\Models\Company\Branch;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
-class BranchController extends Controller
+class BranchController extends ApiController
 {
     /**
      * Display a listing of the resource.

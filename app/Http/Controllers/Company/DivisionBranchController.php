@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Company;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use App\Models\Company\Branch;
+use App\Models\Company\Division;
 use Illuminate\Http\Request;
 
-class DivisionBranchController extends Controller
+class DivisionBranchController extends ApiController
 {
   /**
    * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Division $division)
   {
-    //
+    $branches = $division->branches;
+    return $this->showAll($branches);
   }
 
 
@@ -30,25 +32,15 @@ class DivisionBranchController extends Controller
     //
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\Company\Branch  $branch
-   * @return \Illuminate\Http\Response
-   */
-  public function show(Branch $branch)
-  {
-    //
-  }
 
   /**
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\Company\Branch  $branch
+   * @param  \App\Models\Company\Division  $division
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Branch $branch)
+  public function update(Request $request, Division $division)
   {
     //
   }
@@ -56,10 +48,10 @@ class DivisionBranchController extends Controller
   /**
    * Remove the specified resource from storage.
    *
-   * @param  \App\Models\Company\Branch  $branch
+   * @param  \App\Models\Company\Division  $division
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Branch $branch)
+  public function destroy(Division $division)
   {
     //
   }

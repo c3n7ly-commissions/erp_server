@@ -64,7 +64,7 @@ class DivisionController extends ApiController
     $division->name = $request->name;
 
     if ($division->isClean()) {
-      return $this->errorResponse(['error' => 'you need to specify different values to update'], 422);
+      return $this->errorResponse('you need to specify different values to update', 422);
     }
 
     return $this->showOne($division, 200);

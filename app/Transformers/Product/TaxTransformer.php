@@ -43,7 +43,7 @@ class TaxTransformer extends TransformerAbstract
       "links"  => [
         [
           'rel' => "self",
-          "href" => route("divisions.show", $tax->id)
+          "href" => route("taxes.show", $tax->id)
         ],
       ]
     ];

@@ -6,6 +6,8 @@ use App\Http\Controllers\Company\DivisionBranchController;
 use App\Http\Controllers\Company\DivisionController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\SubCategoryController;
+use App\Http\Controllers\Product\TaxController;
+use App\Http\Controllers\Product\UnitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +56,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   ]);
 
   Route::resource('subcategories', SubCategoryController::class)->except([
+    "create", "edit"
+  ]);
+
+  Route::resource('units', UnitController::class)->except([
+    "create", "edit"
+  ]);
+
+  Route::resource('taxes', TaxController::class)->except([
     "create", "edit"
   ]);
 });

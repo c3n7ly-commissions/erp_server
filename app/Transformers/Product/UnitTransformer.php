@@ -43,7 +43,7 @@ class UnitTransformer extends TransformerAbstract
       "links"  => [
         [
           'rel' => "self",
-          "href" => route("divisions.show", $unit->id)
+          "href" => route("units.show", $unit->id)
         ],
       ]
     ];

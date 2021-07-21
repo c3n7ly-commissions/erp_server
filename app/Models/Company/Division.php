@@ -2,6 +2,7 @@
 
 namespace App\Models\Company;
 
+use App\Models\Product\Product;
 use App\Transformers\Company\DivisionTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,5 +25,10 @@ class Division extends Model
   public function branches()
   {
     return $this->hasMany(Branch::class);
+  }
+
+  public function products()
+  {
+    return $this->hasMany(Product::class);
   }
 }

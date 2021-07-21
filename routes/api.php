@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Company\BranchController;
 use App\Http\Controllers\Company\DivisionBranchController;
 use App\Http\Controllers\Company\DivisionController;
+use App\Http\Controllers\Company\DivisionProductController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\SubCategoryController;
@@ -43,6 +44,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   ]);
 
   Route::resource('divisions.branches', DivisionBranchController::class)->except([
+    "create",  "show", "edit"
+  ]);
+
+  Route::resource('divisions.products', DivisionProductController::class)->except([
     "create",  "show", "edit"
   ]);
   // -----------------------------------------------------------------

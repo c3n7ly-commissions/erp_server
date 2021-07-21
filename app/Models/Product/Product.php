@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Company\Division;
 use App\Transformers\Product\ProductTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,7 @@ class Product extends Model
   use HasFactory, SoftDeletes;
 
   public $transformer = ProductTransformer::class;
+
   const ACTIVE = "active";
   const INACTIVE = "inactive";
   const REJECTED = "rejected";
@@ -40,6 +42,11 @@ class Product extends Model
     "atomic_unit_id",
     "image"
   ];
+
+  public function division()
+  {
+    return $this->belongsTo(Division::class);
+  }
 
   public function tax()
   {

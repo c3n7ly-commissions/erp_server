@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Transformers\Product\UnitTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Unit extends Model
 {
   use HasFactory, SoftDeletes;
+
+  public $transformer = UnitTransformer::class;
 
   protected $dates = [
     "deleted_at"

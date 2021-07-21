@@ -31,13 +31,13 @@ class ProductFactory extends Factory
     return [
       "name" => $this->faker->unique->words(2, true),
       "code" => $this->faker->unique->isbn10(),
-      "weight" => $this->faker->randomFloat(2, 1, 10_000),
+      "bulk_weight" => $bulk_weight = $this->faker->randomFloat(2, 1, 10_000),
+      "conversion" => $this->faker->randomFloat(2, 1, ($bulk_weight / 2)),
       "bulk_selling_price" => $bulk_price = $this->faker->randomFloat(2, 1, 9_000_000),
-      "conversion" => $this->faker->randomFloat(2, 1, $bulk_price),
       "atomic_selling_price" => $this->faker->randomFloat(2, $bulk_price, 99_000_000),
-      "amount_before_tax" => $this->faker->randomFloat(2, 1, 9_000_000),
-      "purchase_price" => $this->faker->randomFloat(2, 1, 9_000_000),
-      "profit_margin" => $this->faker->randomFloat(2, 1, 1_000),
+      "exp_amount_before_tax" => $this->faker->randomFloat(2, 1, 9_000_000),
+      "exp_purchase_price" => $this->faker->randomFloat(2, 1, 9_000_000),
+      "exp_profit_margin" => $this->faker->randomFloat(2, 1, 1_000),
       "status" =>
       $status = $this->faker->randomElement([Product::ACTIVE, Product::INACTIVE, Product::REJECTED]),
       "status_reason" => $status == Product::REJECTED ? $this->faker->paragraph() : null,

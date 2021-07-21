@@ -35,7 +35,7 @@ class TaxTransformer extends TransformerAbstract
     return [
       "id" => (int)$tax->id,
       "name" => (string)$tax->name,
-      "value" => $tax->value,
+      "value" => (float)$tax->value,
       "created_at" => (string)$tax->created_at,
       "updated_at" => (string)$tax->updated_at,
       "deleted_at" => (string)$tax->deleted_at,

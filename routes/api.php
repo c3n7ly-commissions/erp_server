@@ -5,6 +5,7 @@ use App\Http\Controllers\Company\BranchController;
 use App\Http\Controllers\Company\DivisionBranchController;
 use App\Http\Controllers\Company\DivisionController;
 use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\SubCategoryController;
 use App\Http\Controllers\Product\TaxController;
 use App\Http\Controllers\Product\UnitController;
@@ -65,6 +66,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
   Route::resource('taxes', TaxController::class)->except([
     "create", "edit"
+  ]);
+
+  Route::resource('products', ProductController::class)->only([
+    "index", "show"
   ]);
 });
 

@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Transformers\Product\ProductTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +11,7 @@ class Product extends Model
 {
   use HasFactory, SoftDeletes;
 
+  public $transformer = ProductTransformer::class;
   const ACTIVE = "active";
   const INACTIVE = "inactive";
   const REJECTED = "rejected";
@@ -21,13 +23,13 @@ class Product extends Model
   protected $fillable = [
     "name",
     "code",
-    "weight",
-    "bulk_selling_price",
+    "bulk_weight",
     "conversion",
+    "bulk_selling_price",
     "atomic_selling_price",
-    "amount_before_tax",
-    "purchase_price",
-    "profit_margin",
+    "exp_amount_before_tax",
+    "exp_purchase_price",
+    "exp_profit_margin",
     "status",
     "status_reason",
     "division_id",

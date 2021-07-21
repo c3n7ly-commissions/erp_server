@@ -18,13 +18,13 @@ class CreateProductsTable extends Migration
       $table->id();
       $table->string('name');
       $table->string('code');
-      $table->unsignedDecimal('weight', 12, 2);
-      $table->unsignedDecimal('bulk_selling_price', 12, 2);
+      $table->unsignedDecimal('bulk_weight', 12, 2);
       $table->unsignedDecimal('conversion', 12, 2);
+      $table->unsignedDecimal('bulk_selling_price', 12, 2);
       $table->unsignedDecimal('atomic_selling_price', 12, 2);
-      $table->unsignedDecimal('amount_before_tax', 12, 2);
-      $table->unsignedDecimal('purchase_price', 12, 2);
-      $table->unsignedDecimal('profit_margin', 5, 2);
+      $table->unsignedDecimal('exp_amount_before_tax', 12, 2);
+      $table->unsignedDecimal('exp_purchase_price', 12, 2);
+      $table->unsignedDecimal('exp_profit_margin', 5, 2);
       $table->string('status')->default(Product::INACTIVE);
       $table->text('status_reason')->nullable();
       $table->unsignedBigInteger('division_id');

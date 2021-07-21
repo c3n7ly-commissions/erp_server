@@ -27,7 +27,14 @@ class CategoryController extends ApiController
    */
   public function store(Request $request)
   {
-    //
+    $rules = [
+      "name" => "required|string"
+    ];
+
+    $request->validate($rules);
+    $category = Category::create($request->all());
+
+    return $this->showOne($category);
   }
 
   /**
@@ -51,6 +58,19 @@ class CategoryController extends ApiController
   public function update(Request $request, Category $category)
   {
     //
+    $rules = [
+      "name" => "required|string"
+    ];
+    $request->validate($rules);
+    $category->name = $request->name;
+
+    if ($category->isClean()) {
+      return $this->errorResponse('you need to specify different values to update', 422);
+    }
+
+    $category->save();
+
+    return $this->showOne($category, 200);
   }
 
   /**

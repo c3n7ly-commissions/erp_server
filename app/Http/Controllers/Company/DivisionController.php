@@ -67,6 +67,8 @@ class DivisionController extends ApiController
       return $this->errorResponse('you need to specify different values to update', 422);
     }
 
+    $division->save();
+
     return $this->showOne($division, 200);
   }
 

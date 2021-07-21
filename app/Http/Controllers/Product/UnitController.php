@@ -27,7 +27,15 @@ class UnitController extends ApiController
    */
   public function store(Request $request)
   {
-    //
+    $rules = [
+      "name" => "required|string",
+      "description" => "required|string"
+    ];
+
+    $request->validate($rules);
+    $unit = Unit::create($request->all());
+
+    return $this->showOne($unit);
   }
 
   /**
@@ -50,7 +58,25 @@ class UnitController extends ApiController
    */
   public function update(Request $request, Unit $unit)
   {
-    //
+    $rules = [
+      "name" => "string",
+      "description" => "string"
+    ];
+
+    $request->validate($rules);
+
+    $unit->fill($request->only([
+      "name",
+      "description"
+    ]));
+
+    if ($unit->isClean()) {
+      return $this->errorResponse('you need to specify different values to update', 422);
+    }
+
+    $unit->save();
+
+    return $this->showOne($unit);
   }
 
   /**

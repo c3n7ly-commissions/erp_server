@@ -32,7 +32,7 @@ class DivisionBranchController extends ApiController
   {
     $rules = [
       "name" => "required|string",
-      "email" => "required|string",
+      "email" => "required|string|email",
       "telephone" => "required|string",
       "postal_address" => "required|string",
       "physical_address" => "required|string",
@@ -59,7 +59,7 @@ class DivisionBranchController extends ApiController
   {
     $rules = [
       "name" => "string",
-      "email" => "string",
+      "email" => "string|email",
       "telephone" => "string",
       "postal_address" => "string",
       "physical_address" => "string",

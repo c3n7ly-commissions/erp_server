@@ -27,7 +27,15 @@ class TaxController extends ApiController
    */
   public function store(Request $request)
   {
-    //
+    $rules = [
+      "name" => "required|string",
+      "value" => "required|numeric"
+    ];
+
+    $request->validate($rules);
+    $tax = Tax::create($request->all());
+
+    return $this->showOne($tax);
   }
 
   /**
@@ -50,7 +58,24 @@ class TaxController extends ApiController
    */
   public function update(Request $request, Tax $tax)
   {
-    //
+    $rules = [
+      "name" => "string",
+      "value" => "numeric"
+    ];
+
+    $request->validate($rules);
+    $tax->fill($request->only([
+      "name",
+      "value"
+    ]));
+
+    if ($tax->isClean()) {
+      return $this->errorResponse('you need to specify different values to update', 422);
+    }
+
+    $tax->save();
+
+    return $this->showOne($tax);
   }
 
   /**

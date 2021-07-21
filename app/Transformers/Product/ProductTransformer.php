@@ -35,7 +35,7 @@ class ProductTransformer extends TransformerAbstract
     return [
       "id" => (int)$product->id,
       "name" => (string)$product->name,
-      "code" => (string)$product->name,
+      "code" => (string)$product->code,
       "bulk_weight" => (float)$product->bulk_weight,
       "conversion" => (float)$product->conversion,
       "bulk_selling_price" => (float)$product->bulk_selling_price,

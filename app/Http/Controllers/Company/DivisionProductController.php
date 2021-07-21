@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\Company\Division;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class DivisionProductController extends ApiController
@@ -81,6 +82,8 @@ class DivisionProductController extends ApiController
       "exp_amount_before_tax" => "numeric",
       "exp_purchase_price" => "numeric",
       "exp_profit_margin" => "numeric",
+      "status" => "in:" . Product::ACTIVE . "," . Product::INACTIVE . "," . Product::REJECTED,
+      "status_reason" => "string",
       "tax_id" => "numeric|integer|exists:taxes,id",
       "category_id" => "numeric|integer|exists:categories,id",
       "sub_category_id" => "numeric|integer|exists:sub_categories,id",
@@ -102,14 +105,42 @@ class DivisionProductController extends ApiController
       "exp_amount_before_tax",
       "exp_purchase_price",
       "exp_profit_margin",
+      "status",
+      "status_reason",
       "tax_id",
       "category_id",
       "sub_category_id",
       "bulk_unit_id",
       "atomic_unit_id",
-      "image"
     ]));
-    //
+
+    if ($request->filled('status') && $request->status == Product::REJECTED) {
+      if (!$request->filled('status_reason')) {
+        throw new HttpException(
+          422,
+          "when the status field is " . Product::REJECTED . ", the status_reason field is required"
+        );
+      } else {
+        $product->status_reason = $request->status_reason;
+      }
+    }
+
+    if ($product->status != Product::REJECTED) {
+      $product->status_reason = "";
+    }
+
+    if ($request->hasFile('image')) {
+      Storage::disk("images")->delete($product->image);
+      $product->image = $request->image->store('', 'images');
+    }
+
+    if ($product->isClean()) {
+      return $this->errorResponse('you need to specify different values to update', 422);
+    }
+
+    $product->save();
+
+    return $this->showOne($product);
   }
 
   public function checkRelationship(Division $division, Product $product)

@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Company\BranchController;
 use App\Http\Controllers\Company\DivisionBranchController;
 use App\Http\Controllers\Company\DivisionController;
+use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Product\SubCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,15 +28,33 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
+  // =================================================================
+  // company
+  // -----------------------------------------------------------------
   Route::resource('divisions', DivisionController::class)->except([
     "create", "edit"
-  ]);
-  Route::resource('divisions.branches', DivisionBranchController::class)->except([
-    "create",  "show", "edit"
   ]);
 
   Route::resource('branches', BranchController::class)->only([
     "index", "show"
+  ]);
+
+  Route::resource('divisions.branches', DivisionBranchController::class)->except([
+    "create",  "show", "edit"
+  ]);
+  // -----------------------------------------------------------------
+  // =================================================================
+
+
+  // =================================================================
+  // products
+  // -----------------------------------------------------------------
+  Route::resource('categories', CategoryController::class)->except([
+    "create", "edit"
+  ]);
+
+  Route::resource('subcategories', SubCategoryController::class)->except([
+    "create", "edit"
   ]);
 });
 

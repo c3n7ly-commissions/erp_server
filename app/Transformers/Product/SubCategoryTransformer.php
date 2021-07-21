@@ -34,7 +34,7 @@ class SubCategoryTransformer extends TransformerAbstract
   {
     return [
       "id" => (int)$subcategory->id,
-      "name" => (int)$subcategory->name,
+      "name" => (string)$subcategory->name,
       "created_at" => (string)$subcategory->created_at,
       "updated_at" => (string)$subcategory->updated_at,
       "deleted_at" => (string)$subcategory->deleted_at,

@@ -34,7 +34,7 @@ class CategoryTransformer extends TransformerAbstract
   {
     return [
       "id" => (int)$category->id,
-      "name" => (int)$category->name,
+      "name" => (string)$category->name,
       "created_at" => (string)$category->created_at,
       "updated_at" => (string)$category->updated_at,
       "deleted_at" => (string)$category->deleted_at,

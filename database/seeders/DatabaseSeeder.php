@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Company\Branch;
-use App\Models\Company\BranchProductLevel;
 use App\Models\Company\Division;
 use App\Models\Product\Category;
 use App\Models\Product\Product;
+use App\Models\Product\ProductLevel;
 use App\Models\Product\SubCategory;
 use App\Models\Product\Tax;
 use App\Models\Product\Unit;
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
     Tax::truncate();
     Unit::truncate();
     Product::truncate();
-    BranchProductLevel::truncate();
+    ProductLevel::truncate();
 
 
     $userQt = 50;
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
     $taxQt = 100;
     $unitQt = 50;
     $productQt = 300;
-    $bplQt = 300;
+    $plQt = 300;
 
     User::factory($userQt)->create();
     Division::factory($divisionQt)->create();
@@ -54,6 +54,6 @@ class DatabaseSeeder extends Seeder
     Tax::factory($taxQt)->create();
     Unit::factory($unitQt)->create();
     Product::factory($productQt)->create();
-    BranchProductLevel::factory($bplQt)->create();
+    ProductLevel::factory($plQt)->create();
   }
 }

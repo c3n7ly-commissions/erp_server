@@ -2,6 +2,7 @@
 
 namespace App\Models\Company;
 
+use App\Models\Product\ProductLevel;
 use App\Transformers\Company\BranchTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,8 +32,8 @@ class Branch extends Model
     return  $this->belongsTo(Division::class);
   }
 
-  public function branchProductLevels()
+  public function productLevels()
   {
-    return $this->hasMany(BranchProductLevel::class);
+    return $this->hasMany(ProductLevel::class);
   }
 }

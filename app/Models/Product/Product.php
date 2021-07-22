@@ -2,7 +2,6 @@
 
 namespace App\Models\Product;
 
-use App\Models\Company\BranchProductLevel;
 use App\Models\Company\Division;
 use App\Transformers\Product\ProductTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -74,8 +73,8 @@ class Product extends Model
     return $this->belongsTo(Unit::class, "atomic_unit_id");
   }
 
-  public function branchProductLevels()
+  public function productLevels()
   {
-    return $this->hasMany(BranchProductLevel::class);
+    return $this->hasMany(ProductLevel::class);
   }
 }

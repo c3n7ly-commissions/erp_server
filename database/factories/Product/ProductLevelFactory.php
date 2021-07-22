@@ -1,21 +1,20 @@
 <?php
 
-namespace Database\Factories\Company;
+namespace Database\Factories\Product;
 
 use App\Models\Company\Branch;
-use App\Models\Company\BranchProductLevel;
 use App\Models\Product\Product;
+use App\Models\Product\ProductLevel;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 
-class BranchProductLevelFactory extends Factory
+class ProductLevelFactory extends Factory
 {
   /**
    * The name of the factory's corresponding model.
    *
    * @var string
    */
-  protected $model = BranchProductLevel::class;
+  protected $model = ProductLevel::class;
 
   /**
    * Define the model's default state.

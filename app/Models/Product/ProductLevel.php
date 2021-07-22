@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Models\Company;
+namespace App\Models\Product;
 
-use App\Models\Product\Product;
-use App\Transformers\Company\BranchProductLevelTransformer;
+use App\Transformers\Product\ProductLevelTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BranchProductLevel extends Model
+class ProductLevel extends Model
 {
   use HasFactory, SoftDeletes;
 
-  public $transformer = BranchProductLevelTransformer::class;
+  public $transformer = ProductLevelTransformer::class;
 
   protected $dates = [
     "deleted_at"

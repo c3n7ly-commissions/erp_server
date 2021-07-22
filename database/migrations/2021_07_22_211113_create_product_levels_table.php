@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBranchProductLevelsTable extends Migration
+class CreateProductLevelsTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,7 +13,7 @@ class CreateBranchProductLevelsTable extends Migration
    */
   public function up()
   {
-    Schema::create('branch_product_levels', function (Blueprint $table) {
+    Schema::create('product_levels', function (Blueprint $table) {
       $table->id();
       $table->unsignedDecimal("minimum_level", 12, 2);
       $table->unsignedDecimal("maximum_level", 12, 2);
@@ -38,6 +38,6 @@ class CreateBranchProductLevelsTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('branch_product_levels');
+    Schema::dropIfExists('product_levels');
   }
 }

@@ -47,7 +47,7 @@ class ProductLevelTransformer extends TransformerAbstract
       "links"  => [
         [
           'rel' => "self",
-          "href" => route("branches.branch_product_levels.show", $productLevel->id)
+          "href" => route("product_levels.show", $productLevel->id)
         ],
         [
           'rel' => "branch",

@@ -30,4 +30,9 @@ class Branch extends Model
   {
     return  $this->belongsTo(Division::class);
   }
+
+  public function branchProductLevels()
+  {
+    return $this->hasMany(BranchProductLevel::class);
+  }
 }

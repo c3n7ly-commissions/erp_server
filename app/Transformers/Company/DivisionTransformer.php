@@ -47,6 +47,10 @@ class DivisionTransformer extends TransformerAbstract
         [
           "rel" => "divisions.branches",
           "href" => route("divisions.branches.index", $division->id)
+        ],
+        [
+          "rel" => "divisions.products",
+          "href" => route("divisions.products.index", $division->id)
         ]
       ]
     ];

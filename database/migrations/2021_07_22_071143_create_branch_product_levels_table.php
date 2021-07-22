@@ -24,6 +24,8 @@ class CreateBranchProductLevelsTable extends Migration
       $table->timestamps();
       $table->softDeletes();
 
+      $table->unique(["branch_id", "product_id"]);
+
       $table->foreign('branch_id')->references('id')->on('branches');
       $table->foreign('product_id')->references('id')->on('products');
     });

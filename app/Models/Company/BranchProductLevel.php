@@ -36,4 +36,14 @@ class BranchProductLevel extends Model
   {
     return $this->belongsTo(Product::class);
   }
+
+  public function sellable()
+  {
+    return $this->quantity > $this->minimum_level;
+  }
+
+  public function understocked()
+  {
+    return $this->quantity <= $this->reorder_level;
+  }
 }

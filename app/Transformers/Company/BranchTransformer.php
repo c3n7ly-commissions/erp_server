@@ -52,6 +52,10 @@ class BranchTransformer extends TransformerAbstract
         [
           "rel" => "division",
           "href" => route("divisions.show", $branch->division_id)
+        ],
+        [
+          "rel" => "branches.product_levels",
+          "href" => route("branches.product_levels.index", $branch->id)
         ]
       ],
     ];

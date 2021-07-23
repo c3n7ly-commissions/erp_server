@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Company\BranchController;
+use App\Http\Controllers\Company\BranchProductLevelController;
 use App\Http\Controllers\Company\DivisionBranchController;
 use App\Http\Controllers\Company\DivisionController;
 use App\Http\Controllers\Company\DivisionProductController;
@@ -42,6 +43,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
   Route::resource('branches', BranchController::class)->only([
     "index", "show"
+  ]);
+
+  Route::resource('branches.product_levels', BranchProductLevelController::class)->except([
+    "create",  "show", "edit"
   ]);
 
   Route::resource('divisions.branches', DivisionBranchController::class)->except([

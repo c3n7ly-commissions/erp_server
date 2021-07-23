@@ -23,14 +23,20 @@ class ProductLevelFactory extends Factory
    */
   public function definition()
   {
+    $valid_products = Product::where("status", Product::ACTIVE)
+      ->select("id")
+      ->get()
+      ->pluck("id")
+      ->toArray();
+
     $branch_count = Branch::all()->count();
-    $product_count = Product::all()->count();
     $branch_products = [];
     for ($i = 1; $i <= $branch_count; $i++) {
-      for ($j = 1; $j <= $product_count; $j++) {
-        array_push($branch_products, $i . "-" . $j);
+      foreach ($valid_products as $valid_product) {
+        array_push($branch_products, $i . "-" . $valid_product);
       }
     }
+
     $branch_and_product = $this->faker->unique->randomElement($branch_products);
     $branch_and_product = explode('-', $branch_and_product);
     $branch_id = $branch_and_product[0];

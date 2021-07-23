@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\ApiController;
 use App\Models\Company\Branch;
+use App\Models\Product\Product;
 use App\Models\Product\ProductLevel;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,12 @@ class BranchProductLevelController extends ApiController
     $data = $request->all();
 
     $data['branch_id'] = $branch->id;
+
+    $product = Product::findOrFail($data['product_id']);
+    if (!$product->isActive()) {
+      return  $this->errorResponse("The selected product has not been activated", 422);
+    }
+
     $productLevel = ProductLevel::create($data);
 
     return $this->showOne($productLevel);
@@ -72,6 +79,15 @@ class BranchProductLevelController extends ApiController
       "quantity",
       "product_id",
     ]));
+
+    if ($request->has("product_id")) {
+      $product = Product::findOrFail($request->product_id);
+      if (!$product->isActive()) {
+        return  $this->errorResponse("The selected product has not been activated", 422);
+      } else {
+        $productLevel->product_id = $request->product_id;
+      }
+    }
 
     if ($productLevel->isClean()) {
       return $this->errorResponse('you need to specify different values to update', 422);

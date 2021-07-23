@@ -77,4 +77,9 @@ class Product extends Model
   {
     return $this->hasMany(ProductLevel::class);
   }
+
+  public function isActive()
+  {
+    return $this->status == Product::ACTIVE;
+  }
 }

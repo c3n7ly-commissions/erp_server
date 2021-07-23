@@ -9,6 +9,7 @@ use App\Http\Controllers\Company\DivisionController;
 use App\Http\Controllers\Company\DivisionProductController;
 use App\Http\Controllers\Company\Partners\Supplier\DivisionSupplierController;
 use App\Http\Controllers\Partners\Supplier\SupplierController;
+use App\Http\Controllers\Partners\Supplier\SupplierDivisionSupplierController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductLevelController;
@@ -99,6 +100,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   // -----------------------------------------------------------------
   Route::resource('suppliers', SupplierController::class)->except([
     "create", "edit"
+  ]);
+
+  Route::resource('suppliers.division_suppliers', SupplierDivisionSupplierController::class)->only([
+    "index"
   ]);
 
   Route::resource('division_suppliers', DivisionSupplierController::class)->only([

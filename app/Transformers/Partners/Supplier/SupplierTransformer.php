@@ -55,7 +55,7 @@ class SupplierTransformer extends TransformerAbstract
         ],
         [
           'rel' => "suppliers.division_suppliers",
-          // "href" => route("suppliers.division_suppliers.index", $supplier->id)
+          "href" => route("suppliers.division_suppliers.index", $supplier->id)
         ],
       ]
     ];

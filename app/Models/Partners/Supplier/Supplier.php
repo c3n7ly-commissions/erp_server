@@ -40,4 +40,9 @@ class Supplier extends Model
   {
     return $this->hasMany(DivisionSupplier::class);
   }
+
+  public function isActive()
+  {
+    return $this->status == Supplier::ACTIVE;
+  }
 }

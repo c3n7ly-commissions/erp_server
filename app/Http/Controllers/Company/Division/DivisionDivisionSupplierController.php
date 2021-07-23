@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Company\Division;
 use App\Http\Controllers\ApiController;
 use App\Models\Company\Division;
 use App\Models\Company\Partners\Supplier\DivisionSupplier;
+use App\Models\Partners\Supplier\Supplier;
 use Illuminate\Http\Request;
 
 class DivisionDivisionSupplierController extends ApiController
@@ -26,8 +27,23 @@ class DivisionDivisionSupplierController extends ApiController
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(Request $request, Division $division)
   {
+    $rules = [
+      "supplier_id" => "required|numeric|integer|exists:suppliers,id",
+    ];
+
+    $request->validate($rules);
+    $data = $request->all();
+    $data["division_id"] =  $division->id;
+
+    $supplier = Supplier::findOrFail($data['supplier_id']);
+    if (!$supplier->isActive()) {
+      return  $this->errorResponse("The selected supplier has not been activated", 422);
+    }
+
+    $divisionSupplier =  DivisionSupplier::create($data);
+    return $this->showOne($divisionSupplier);
   }
 
   /**

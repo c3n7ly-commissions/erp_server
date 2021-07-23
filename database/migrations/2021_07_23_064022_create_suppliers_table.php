@@ -21,8 +21,9 @@ class CreateSuppliersTable extends Migration
       $table->string("telephone");
       $table->string("postal_address");
       $table->string("physical_address");
-      $table->string("tax_id");
+      $table->string("tax_id")->unique();
       $table->string("status")->default(Supplier::INACTIVE);
+      $table->text("status_reason")->nullable();
       $table->unsignedDecimal("payment_terms", 12, 2);
       $table->unsignedDecimal("credit_limit", 12, 2);
       $table->timestamps();

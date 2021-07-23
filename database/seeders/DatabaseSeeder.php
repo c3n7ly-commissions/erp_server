@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Company\Branch;
 use App\Models\Company\Division;
+use App\Models\Partners\Supplier\Supplier;
 use App\Models\Product\Category;
 use App\Models\Product\Product;
 use App\Models\Product\ProductLevel;
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
     Unit::truncate();
     Product::truncate();
     ProductLevel::truncate();
+    Supplier::truncate();
 
 
     $userQt = 50;
@@ -45,6 +47,7 @@ class DatabaseSeeder extends Seeder
     $unitQt = 50;
     $productQt = 300;
     $plQt = 300;
+    $supplierQt = 200;
 
     User::factory($userQt)->create();
     Division::factory($divisionQt)->create();
@@ -55,5 +58,6 @@ class DatabaseSeeder extends Seeder
     Unit::factory($unitQt)->create();
     Product::factory($productQt)->create();
     ProductLevel::factory($plQt)->create();
+    Supplier::factory($supplierQt)->create();
   }
 }

@@ -26,6 +26,7 @@ class Supplier extends Model
     "physical_address",
     "tax_id",
     "status",
+    "status_reason",
     "payment_terms",
     "credit_limit",
   ];

@@ -27,7 +27,23 @@ class SupplierController extends ApiController
    */
   public function store(Request $request)
   {
-    //
+    $rules = [
+      "name" => "required|string",
+      "email" => "required|string|email",
+      "telephone" => "required|string",
+      "postal_address" => "required|string",
+      "physical_address" => "required|string",
+      "tax_id" => "required|string",
+      "payment_terms" => "required|numeric",
+      "credit_limit" => "required|numeric",
+    ];
+
+    $request->validate($rules);
+    $data = $request->all();
+    $data['status'] = Supplier::INACTIVE;
+    $supplier = Supplier::create($data);
+
+    return $this->showOne($supplier);
   }
 
   /**
@@ -50,7 +66,53 @@ class SupplierController extends ApiController
    */
   public function update(Request $request, Supplier $supplier)
   {
-    //
+    $rules = [
+      "name" => "string",
+      "email" => "string|email",
+      "telephone" => "string",
+      "postal_address" => "string",
+      "physical_address" => "string",
+      "tax_id" => "string",
+      "status" => "in:" . Supplier::ACTIVE . "," . Supplier::INACTIVE . "," . Supplier::REJECTED,
+      "status_reason" => "string",
+      "payment_terms" => "numeric",
+      "credit_limit" => "numeric",
+    ];
+
+    $request->validate($rules);
+
+    $supplier->fill($request->only([
+      "name",
+      "email",
+      "telephone",
+      "postal_address",
+      "physical_address",
+      "tax_id",
+      "status",
+      "payment_terms",
+      "credit_limit",
+    ]));
+
+
+    if ($request->filled('status') && $request->status == Supplier::REJECTED) {
+      if (!$request->filled('status_reason')) {
+        return $this->showStatusReasonRequired(Supplier::REJECTED);
+      } else {
+        $supplier->status_reason = $request->status_reason;
+      }
+    }
+
+    if ($supplier->status != Supplier::REJECTED) {
+      $supplier->status_reason = "";
+    }
+
+    if ($supplier->isClean()) {
+      return $this->showUnchangedError();
+    }
+
+    $supplier->save();
+
+    return $this->showOne($supplier);
   }
 
   /**
@@ -61,6 +123,8 @@ class SupplierController extends ApiController
    */
   public function destroy(Supplier $supplier)
   {
-    //
+    $supplier->delete();
+
+    return $this->showOne($supplier);
   }
 }

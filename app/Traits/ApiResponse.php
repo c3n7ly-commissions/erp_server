@@ -47,4 +47,17 @@ trait ApiResponse
     $transformation = fractal($data, new $transformer);
     return $transformation->toArray();
   }
+
+  protected function showStatusReasonRequired($trigger_status)
+  {
+    return $this->errorResponse(
+      "when the status field is " . $trigger_status . ", the status_reason field is required",
+      422
+    );
+  }
+
+  protected function showUnchangedError()
+  {
+    return $this->errorResponse('you need to specify different values to update', 422);
+  }
 }

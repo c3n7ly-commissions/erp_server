@@ -116,10 +116,7 @@ class DivisionProductController extends ApiController
 
     if ($request->filled('status') && $request->status == Product::REJECTED) {
       if (!$request->filled('status_reason')) {
-        throw new HttpException(
-          422,
-          "when the status field is " . Product::REJECTED . ", the status_reason field is required"
-        );
+        return $this->showStatusReasonRequired(Product::REJECTED);
       } else {
         $product->status_reason = $request->status_reason;
       }
@@ -135,7 +132,7 @@ class DivisionProductController extends ApiController
     }
 
     if ($product->isClean()) {
-      return $this->errorResponse('you need to specify different values to update', 422);
+      return $this->showUnchangedError();
     }
 
     $product->save();

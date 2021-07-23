@@ -23,18 +23,26 @@ class DivisionSupplierFactory extends Factory
    */
   public function definition()
   {
+    $valid_suppliers = Supplier::where("status", Supplier::ACTIVE)
+      ->select("id")
+      ->get()
+      ->pluck("id")
+      ->toArray();
+
     $division_count = Division::all()->count();
-    $supplier_count = Supplier::all()->count();
+
     $division_suppliers = [];
     for ($i = 1; $i <= $division_count; $i++) {
-      for ($j = 1; $j <= $supplier_count; $j++) {
-        array_push($division_suppliers, $i . "-" . $j);
+      foreach ($valid_suppliers as $valid_supplier) {
+        array_push($division_suppliers, $i . "-" . $valid_supplier);
       }
     }
+
     $division_and_supplier = $this->faker->unique->randomElement($division_suppliers);
     $division_and_supplier = explode('-', $division_and_supplier);
     $division_id = $division_and_supplier[0];
     $supplier_id = $division_and_supplier[1];
+
     return [
       "division_id" =>  $division_id,
       "supplier_id" => $supplier_id

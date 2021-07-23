@@ -2,6 +2,7 @@
 
 namespace App\Models\Partners\Supplier;
 
+use App\Models\Company\Partners\Supplier\DivisionSupplier;
 use App\Transformers\Partners\Supplier\SupplierTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,4 +35,9 @@ class Supplier extends Model
     "payment_terms",
     "credit_limit",
   ];
+
+  public function divisionSuppliers()
+  {
+    return $this->hasMany(DivisionSupplier::class);
+  }
 }

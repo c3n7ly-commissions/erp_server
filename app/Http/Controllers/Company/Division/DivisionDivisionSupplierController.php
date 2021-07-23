@@ -53,9 +53,30 @@ class DivisionDivisionSupplierController extends ApiController
    * @param  \App\Models\Company\Division  $division
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Division $division)
+  public function update(Request $request, Division $division, DivisionSupplier $division_supplier)
   {
-    //
+    $rules = [
+      "supplier_id" => "numeric|integer|exists:suppliers,id",
+    ];
+    $request->validate($rules);
+    $this->checkRelationship($division, $division_supplier);
+
+    if ($request->has("supplier_id")) {
+      $supplier = Supplier::findOrFail($request->supplier_id);
+      if (!$supplier->isActive()) {
+        return  $this->errorResponse("The selected supplier has not been activated", 422);
+      } else {
+        $division_supplier->supplier_id = $request->supplier_id;
+      }
+    }
+
+    if ($division_supplier->isClean()) {
+      return $this->errorResponse('you need to specify different values to update', 422);
+    }
+
+    $division_supplier->save();
+
+    return $this->showOne($division_supplier);
   }
 
   public function checkRelationship(Division $division, DivisionSupplier $divisionSupplier)

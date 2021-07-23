@@ -6,6 +6,7 @@ use App\Http\Controllers\Company\BranchProductLevelController;
 use App\Http\Controllers\Company\DivisionBranchController;
 use App\Http\Controllers\Company\DivisionController;
 use App\Http\Controllers\Company\DivisionProductController;
+use App\Http\Controllers\Partners\Supplier\SupplierController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductLevelController;
@@ -85,6 +86,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
   Route::resource('product_levels', ProductLevelController::class)->only([
     "index", "show"
+  ]);
+
+  // =================================================================
+  // partners
+  // -----------------------------------------------------------------
+  Route::resource('suppliers', SupplierController::class)->except([
+    "create", "edit"
   ]);
 });
 

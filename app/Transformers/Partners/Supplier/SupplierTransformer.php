@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transformers\Supplier\Supplier;
+namespace App\Transformers\Partners\Supplier;
 
 use App\Models\Partners\Supplier\Supplier;
 use League\Fractal\TransformerAbstract;

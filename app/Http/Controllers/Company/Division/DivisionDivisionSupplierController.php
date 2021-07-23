@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company\Division;
 
 use App\Http\Controllers\ApiController;
 use App\Models\Company\Division;
+use App\Models\Company\Partners\Supplier\DivisionSupplier;
 use Illuminate\Http\Request;
 
 class DivisionDivisionSupplierController extends ApiController
@@ -41,14 +42,24 @@ class DivisionDivisionSupplierController extends ApiController
     //
   }
 
+  public function checkRelationship(Division $division, DivisionSupplier $divisionSupplier)
+  {
+    if ($division->id != $divisionSupplier->division_id) {
+      return  $this->showRelationshipError("division", "divisionSupplier");
+    }
+  }
+
+
   /**
    * Remove the specified resource from storage.
    *
    * @param  \App\Models\Company\Division  $division
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Division $division)
+  public function destroy(Division $division, DivisionSupplier $division_supplier)
   {
-    //
+    $this->checkRelationship($division, $division_supplier);
+    $division_supplier->delete();
+    return $this->showOne($division_supplier);
   }
 }

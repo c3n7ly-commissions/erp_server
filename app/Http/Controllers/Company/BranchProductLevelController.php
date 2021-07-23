@@ -6,7 +6,6 @@ use App\Http\Controllers\ApiController;
 use App\Models\Company\Branch;
 use App\Models\Product\ProductLevel;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class BranchProductLevelController extends ApiController
 {
@@ -86,10 +85,7 @@ class BranchProductLevelController extends ApiController
   public function checkRelationship(Branch $branch, ProductLevel $productLevel)
   {
     if ($branch->id != $productLevel->branch_id) {
-      throw new HttpException(
-        422,
-        "there exists no relationship between the passed branch and productLevel"
-      );
+      return  $this->showRelationshipError("branch", "productLevel");
     }
   }
 

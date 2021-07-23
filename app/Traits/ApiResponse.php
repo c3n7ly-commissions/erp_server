@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 trait ApiResponse
 {
   private function successResponse($data, $code)
@@ -48,6 +50,7 @@ trait ApiResponse
     return $transformation->toArray();
   }
 
+  // TODO: Migrate old controllers to use these instead
   protected function showStatusReasonRequired($trigger_status)
   {
     return $this->errorResponse(
@@ -59,5 +62,13 @@ trait ApiResponse
   protected function showUnchangedError()
   {
     return $this->errorResponse('you need to specify different values to update', 422);
+  }
+
+  protected function showRelationshipError($model_a, $model_b)
+  {
+    throw new HttpException(
+      422,
+      'there exists no relationship between the passed ' . $model_a . ' and ' . $model_b
+    );
   }
 }

@@ -54,17 +54,42 @@ class DatabaseSeeder extends Seeder
     $supplierQt = 200;
     $divisionSuppliersQt = 300;
 
+
+    // Log to console 
+    // https://stackoverflow.com/a/45864432/7450617
+    $this->command->info("Seeding:");
+
+    $this->command->info("\t User");
     User::factory($userQt)->create();
+
+    $this->command->info("\t Division");
     Division::factory($divisionQt)->create();
+
+    $this->command->info("\t Branch");
     Branch::factory($branchQt)->create();
+
+    $this->command->info("\t Category");
     Category::factory($categoryQt)->create();
+
+    $this->command->info("\t SubCategory");
     SubCategory::factory($subCategoryQt)->create();
+
+    $this->command->info("\t Tax");
     Tax::factory($taxQt)->create();
+
+    $this->command->info("\t Unit");
     Unit::factory($unitQt)->create();
+
+    $this->command->info("\t Product");
     Product::factory($productQt)->create();
+
+    $this->command->info("\t ProductLevel");
     ProductLevel::factory($plQt)->create();
 
+    $this->command->info("\t Supplier");
     Supplier::factory($supplierQt)->create();
+
+    $this->command->info("\t DivisionSupplier");
     DivisionSupplier::factory($divisionSuppliersQt)->create();
   }
 }

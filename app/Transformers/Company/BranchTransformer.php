@@ -39,7 +39,7 @@ class BranchTransformer extends TransformerAbstract
       "telephone" => (string)$branch->telephone,
       "postal_address" => (string)$branch->postal_address,
       "physical_address" => (string)$branch->physical_address,
-      "division_id" => (string)$branch->division_id,
+      "division_id" => (int)$branch->division_id,
       "created_at" => (string)$branch->created_at,
       "updated_at" => (string)$branch->updated_at,
       "deleted_at" => (string)$branch->deleted_at,

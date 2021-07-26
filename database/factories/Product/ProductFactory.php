@@ -39,7 +39,9 @@ class ProductFactory extends Factory
       "exp_purchase_price" => $this->faker->randomFloat(2, 1, 9_000_000),
       "exp_profit_margin" => $this->faker->randomFloat(2, 1, 1_000),
       "status" =>
-      $status = $this->faker->randomElement([Product::ACTIVE, Product::INACTIVE, Product::REJECTED]),
+      $status = $this->faker->randomElement(
+        [Product::ACTIVE, Product::INACTIVE, Product::PENDING, Product::REJECTED]
+      ),
       "status_reason" => $status == Product::REJECTED ? $this->faker->paragraph() : null,
       "division_id" => Division::all()->random()->id,
       "tax_id" => Tax::all()->random()->id,

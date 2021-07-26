@@ -53,7 +53,7 @@ class DivisionProductController extends ApiController
     $request->validate($rules);
 
     $data = $request->all();
-    $data['status'] = Product::INACTIVE;
+    $data['status'] = Product::PENDING;
     $data['image'] = $request->image->store('', 'images');
     $data['division_id'] = $division->id;
 
@@ -82,7 +82,7 @@ class DivisionProductController extends ApiController
       "exp_amount_before_tax" => "numeric",
       "exp_purchase_price" => "numeric",
       "exp_profit_margin" => "numeric",
-      "status" => "in:" . Product::ACTIVE . "," . Product::INACTIVE . "," . Product::REJECTED,
+      "status" => "in:" . Product::ACTIVE . "," . Product::INACTIVE . "," . Product::PENDING . "," . Product::REJECTED,
       "status_reason" => "string",
       "tax_id" => "numeric|integer|exists:taxes,id",
       "category_id" => "numeric|integer|exists:categories,id",
@@ -94,6 +94,18 @@ class DivisionProductController extends ApiController
     $request->validate($rules);
 
     $this->checkRelationship($division, $product);
+
+    if ($request->filled('status') && $request->status == Product::REJECTED) {
+      if ($product->status != Product::PENDING) {
+        return $this->showRejectingNotAllowed("products", Product::PENDING);
+      }
+
+      if (!$request->filled('status_reason')) {
+        return $this->showStatusReasonRequired(Product::REJECTED);
+      } else {
+        $product->status_reason = $request->status_reason;
+      }
+    }
 
     $product->fill($request->only([
       "name",
@@ -114,13 +126,6 @@ class DivisionProductController extends ApiController
       "atomic_unit_id",
     ]));
 
-    if ($request->filled('status') && $request->status == Product::REJECTED) {
-      if (!$request->filled('status_reason')) {
-        return $this->showStatusReasonRequired(Product::REJECTED);
-      } else {
-        $product->status_reason = $request->status_reason;
-      }
-    }
 
     if ($product->status != Product::REJECTED) {
       $product->status_reason = "";

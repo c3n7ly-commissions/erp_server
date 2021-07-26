@@ -16,6 +16,7 @@ class Product extends Model
 
   const ACTIVE = "active";
   const INACTIVE = "inactive";
+  const PENDING = "pending";
   const REJECTED = "rejected";
 
   protected $dates = [

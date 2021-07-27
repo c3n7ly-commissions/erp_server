@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
       $table->unsignedDecimal('exp_amount_before_tax', 12, 2);
       $table->unsignedDecimal('exp_purchase_price', 12, 2);
       $table->unsignedDecimal('exp_profit_margin', 5, 2);
-      $table->string('status')->default(Product::INACTIVE);
+      $table->string('status')->default(Product::PENDING);
       $table->text('status_reason')->nullable();
       $table->unsignedBigInteger('division_id');
       $table->unsignedBigInteger('tax_id');

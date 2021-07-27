@@ -71,4 +71,12 @@ trait ApiResponse
       'there exists no relationship between the passed ' . $model_a . ' and ' . $model_b
     );
   }
+
+  protected function showRejectingNotAllowed($model_name, $allowed)
+  {
+    throw new HttpException(
+      422,
+      "you can only reject " . $model_name . " with " . $allowed . " status"
+    );
+  }
 }

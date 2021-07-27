@@ -79,6 +79,11 @@ class Product extends Model
     return $this->hasMany(ProductLevel::class);
   }
 
+  public function supplierProducts()
+  {
+    return $this->hasMany(SupplierProduct::class);
+  }
+
   public function isActive()
   {
     return $this->status == Product::ACTIVE;

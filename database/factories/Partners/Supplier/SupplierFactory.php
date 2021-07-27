@@ -29,7 +29,7 @@ class SupplierFactory extends Factory
       "physical_address" => $this->faker->streetAddress(),
       "tax_id" => $this->faker->unique->regexify('[A-Z][0-9]{9}[A-Z]'),
       "status" =>
-      $status = $this->faker->randomElement([Supplier::ACTIVE, Supplier::INACTIVE, Supplier::REJECTED]),
+      $status = $this->faker->randomElement([Supplier::ACTIVE, Supplier::INACTIVE, Supplier::PENDING, Supplier::REJECTED]),
       "status_reason" => $status == Supplier::REJECTED ? $this->faker->paragraph() : null,
       "payment_terms" => $this->faker->numberBetween(0, 300),
       "credit_limit" => $this->faker->randomFloat(2, 1, 9_000_000),

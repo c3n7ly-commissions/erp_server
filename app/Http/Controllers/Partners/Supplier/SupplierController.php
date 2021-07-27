@@ -73,13 +73,25 @@ class SupplierController extends ApiController
       "postal_address" => "string",
       "physical_address" => "string",
       "tax_id" => "string",
-      "status" => "in:" . Supplier::ACTIVE . "," . Supplier::INACTIVE . "," . Supplier::REJECTED,
+      "status" => "in:" . Supplier::ACTIVE . "," . Supplier::INACTIVE . "," . Supplier::PENDING . "," . Supplier::REJECTED,
       "status_reason" => "string",
       "payment_terms" => "numeric",
       "credit_limit" => "numeric",
     ];
 
     $request->validate($rules);
+
+    if ($request->filled('status') && $request->status == Supplier::REJECTED) {
+      if ($supplier->status != Supplier::PENDING) {
+        return $this->showRejectingNotAllowed("suppliers", Supplier::PENDING);
+      }
+
+      if (!$request->filled('status_reason')) {
+        return $this->showStatusReasonRequired(Supplier::REJECTED);
+      } else {
+        $supplier->status_reason = $request->status_reason;
+      }
+    }
 
     $supplier->fill($request->only([
       "name",
@@ -92,15 +104,6 @@ class SupplierController extends ApiController
       "payment_terms",
       "credit_limit",
     ]));
-
-
-    if ($request->filled('status') && $request->status == Supplier::REJECTED) {
-      if (!$request->filled('status_reason')) {
-        return $this->showStatusReasonRequired(Supplier::REJECTED);
-      } else {
-        $supplier->status_reason = $request->status_reason;
-      }
-    }
 
     if ($supplier->status != Supplier::REJECTED) {
       $supplier->status_reason = "";

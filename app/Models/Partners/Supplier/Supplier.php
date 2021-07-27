@@ -14,6 +14,7 @@ class Supplier extends Model
 
   const ACTIVE = "active";
   const INACTIVE = "inactive";
+  const PENDING = "pending";
   const REJECTED = "rejected";
 
 
@@ -44,5 +45,20 @@ class Supplier extends Model
   public function isActive()
   {
     return $this->status == Supplier::ACTIVE;
+  }
+
+  public function isInactive()
+  {
+    return $this->status == Supplier::INACTIVE;
+  }
+
+  public function isPending()
+  {
+    return $this->status == Supplier::PENDING;
+  }
+
+  public function isRejected()
+  {
+    return $this->status == Supplier::REJECTED;
   }
 }

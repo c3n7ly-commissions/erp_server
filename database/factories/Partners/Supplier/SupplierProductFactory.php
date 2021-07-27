@@ -38,7 +38,7 @@ class SupplierProductFactory extends Factory
     $supplier_products = [];
     foreach ($valid_suppliers as $valid_supplier) {
       foreach ($valid_products as $valid_product) {
-        array_push($division_suppliers, $valid_supplier . "-" . $valid_product);
+        array_push($supplier_products, $valid_supplier . "-" . $valid_product);
       }
     }
 

@@ -6,6 +6,7 @@ use App\Models\Company\Branch;
 use App\Models\Company\Division;
 use App\Models\Company\Partners\Supplier\DivisionSupplier;
 use App\Models\Partners\Supplier\Supplier;
+use App\Models\Partners\Supplier\SupplierProduct;
 use App\Models\Product\Category;
 use App\Models\Product\Product;
 use App\Models\Product\ProductLevel;
@@ -40,6 +41,7 @@ class DatabaseSeeder extends Seeder
 
     Supplier::truncate();
     DivisionSupplier::truncate();
+    SupplierProduct::truncate();
 
 
     $userQt = 50;
@@ -49,10 +51,11 @@ class DatabaseSeeder extends Seeder
     $subCategoryQt = 100;
     $taxQt = 100;
     $unitQt = 50;
-    $productQt = 300;
+    $productQt = 500;
     $plQt = 300;
-    $supplierQt = 200;
+    $supplierQt = 1000;
     $divisionSuppliersQt = 300;
+    $supplierProductQt = 300;
 
 
     // Log to console 
@@ -91,5 +94,8 @@ class DatabaseSeeder extends Seeder
 
     $this->command->info("\t DivisionSupplier");
     DivisionSupplier::factory($divisionSuppliersQt)->create();
+
+    $this->command->info("\t SupplierProduct");
+    SupplierProduct::factory($supplierProductQt)->create();
   }
 }

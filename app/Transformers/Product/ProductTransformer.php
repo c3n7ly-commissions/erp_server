@@ -85,6 +85,10 @@ class ProductTransformer extends TransformerAbstract
           'rel' => "atomic_unit",
           "href" => route("units.show", $product->atomic_unit_id)
         ],
+        [
+          'rel' => "products.supplier_products",
+          "href" => route("products.supplier_products.index", $product->id)
+        ],
       ]
     ];
   }

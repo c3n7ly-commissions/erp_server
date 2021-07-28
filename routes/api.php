@@ -15,6 +15,7 @@ use App\Http\Controllers\Partners\Supplier\SupplierSupplierProductController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductLevelController;
+use App\Http\Controllers\Product\ProductSupplierProductController;
 use App\Http\Controllers\Product\SubCategoryController;
 use App\Http\Controllers\Product\TaxController;
 use App\Http\Controllers\Product\UnitController;
@@ -95,6 +96,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
   Route::resource('product_levels', ProductLevelController::class)->only([
     "index", "show"
+  ]);
+
+  Route::resource('products.supplier_products', ProductSupplierProductController::class)->except([
+    "create", "show", "edit"
   ]);
 
   // =================================================================

@@ -3,6 +3,7 @@
 namespace App\Models\Product;
 
 use App\Models\Company\Division;
+use App\Models\Partners\Supplier\SupplierProduct;
 use App\Transformers\Product\ProductTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

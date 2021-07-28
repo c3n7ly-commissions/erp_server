@@ -10,6 +10,8 @@ use App\Http\Controllers\Company\DivisionProductController;
 use App\Http\Controllers\Company\Partners\Supplier\DivisionSupplierController;
 use App\Http\Controllers\Partners\Supplier\SupplierController;
 use App\Http\Controllers\Partners\Supplier\SupplierDivisionSupplierController;
+use App\Http\Controllers\Partners\Supplier\SupplierProductController;
+use App\Http\Controllers\Partners\Supplier\SupplierSupplierProductController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductLevelController;
@@ -50,19 +52,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   ]);
 
   Route::resource('branches.product_levels', BranchProductLevelController::class)->except([
-    "create",  "show", "edit"
+    "create", "show", "edit"
   ]);
 
   Route::resource('divisions.branches', DivisionBranchController::class)->except([
-    "create",  "show", "edit"
+    "create", "show", "edit"
   ]);
 
   Route::resource('divisions.products', DivisionProductController::class)->except([
-    "create",  "show", "edit"
+    "create", "show", "edit"
   ]);
 
   Route::resource('divisions.division_suppliers', DivisionDivisionSupplierController::class)->except([
-    "create",  "show", "edit"
+    "create", "show", "edit"
   ]);
   // -----------------------------------------------------------------
   // =================================================================
@@ -102,13 +104,23 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     "create", "edit"
   ]);
 
-  Route::resource('suppliers.division_suppliers', SupplierDivisionSupplierController::class)->only([
-    "index"
-  ]);
+  Route::resource('suppliers.division_suppliers', SupplierDivisionSupplierController::class)
+    ->only([
+      "index"
+    ]);
 
   Route::resource('division_suppliers', DivisionSupplierController::class)->only([
     "index", "show"
   ]);
+
+  Route::resource('supplier_products', SupplierProductController::class)->only([
+    "index", "show"
+  ]);
+
+  Route::resource('suppliers.supplier_products', SupplierSupplierProductController::class)
+    ->only([
+      "index"
+    ]);
 });
 
 Route::post('auth/register', [AuthController::class, 'register'])->name('auth.register');

@@ -71,7 +71,7 @@ class DivisionDivisionSupplierController extends ApiController
     }
 
     if ($division_supplier->isClean()) {
-      return $this->errorResponse('you need to specify different values to update', 422);
+      return $this->showUnchangedError();
     }
 
     $division_supplier->save();

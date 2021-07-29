@@ -20,6 +20,8 @@ class CreateSupplierProductsTable extends Migration
       $table->timestamps();
       $table->softDeletes();
 
+      $table->unique(["supplier_id", "product_id"]);
+
       $table->foreign('supplier_id')->references('id')->on('suppliers');
       $table->foreign('product_id')->references('id')->on('products');
     });

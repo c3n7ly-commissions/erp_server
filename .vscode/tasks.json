@@ -22,6 +22,11 @@
             "label": "sync",
             "type": "shell",
             "command": "git pull origin main && git pull upstream main && git push origin main && git push upstream main"
+        },
+        {
+            "label": "deploy.heroku",
+            "type": "shell",
+            "command": "git push heroku main"
         }
     ]
 }

@@ -1,7 +1,7 @@
 # ERP Server
 ![org](https://img.shields.io/badge/org-c3n7-9cf)
 ![license](https://img.shields.io/badge/license-%09AGPL--3.0--or--later-blue)
-![[heroku](https://laravel-erp-server.herokuapp.com/)](https://img.shields.io/badge/sample-heroku-4F3074)  
+[![](https://img.shields.io/badge/sample-Heroku-4F3074)](https://laravel-erp-server.herokuapp.com/)  
 - n Approach. A sample of the app has been deployed on [heroku](https://laravel-erp-server.herokuapp.com/)
 
 ### License 

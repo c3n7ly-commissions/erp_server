@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
    */
   public function run()
   {
+    // for MySQL
     // DB::statement("SET FOREIGN_KEY_CHECKS = 0");
+    // for PostgreSQL
     DB::statement("SET session_replication_role = 'replica';");
 
     User::truncate();
@@ -99,7 +101,7 @@ class DatabaseSeeder extends Seeder
     $this->command->info("\t SupplierProduct");
     SupplierProduct::factory($supplierProductQt)->create();
 
-    // for postgresql
+    // for PostgreSQL
     DB::statement("SET session_replication_role = 'origin';");
   }
 }

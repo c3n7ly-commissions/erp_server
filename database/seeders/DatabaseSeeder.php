@@ -28,24 +28,22 @@ class DatabaseSeeder extends Seeder
   {
     // for MySQL
     // DB::statement("SET FOREIGN_KEY_CHECKS = 0");
-    // for PostgreSQL
-    DB::statement("SET session_replication_role = 'replica';");
 
-    User::truncate();
-    Division::truncate();
-    Branch::truncate();
+    SupplierProduct::truncate();
+    DivisionSupplier::truncate();
+    Supplier::truncate();
 
-    Category::truncate();
-    SubCategory::truncate();
+    ProductLevel::truncate();
+    Product::truncate();
+
     Tax::truncate();
     Unit::truncate();
-    Product::truncate();
-    ProductLevel::truncate();
+    SubCategory::truncate();
+    Category::truncate();
 
-    Supplier::truncate();
-    DivisionSupplier::truncate();
-    SupplierProduct::truncate();
-
+    Branch::truncate();
+    Division::truncate();
+    User::truncate();
 
     $userQt = 50;
     $divisionQt = 10;
@@ -100,8 +98,5 @@ class DatabaseSeeder extends Seeder
 
     $this->command->info("\t SupplierProduct");
     SupplierProduct::factory($supplierProductQt)->create();
-
-    // for PostgreSQL
-    DB::statement("SET session_replication_role = 'origin';");
   }
 }

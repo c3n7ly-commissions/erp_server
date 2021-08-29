@@ -29,21 +29,21 @@ class DatabaseSeeder extends Seeder
     // for MySQL
     // DB::statement("SET FOREIGN_KEY_CHECKS = 0");
 
-    SupplierProduct::truncate();
-    DivisionSupplier::truncate();
-    Supplier::truncate();
+    // SupplierProduct::truncate();
+    // DivisionSupplier::truncate();
+    // Supplier::truncate();
 
-    ProductLevel::truncate();
-    Product::truncate();
+    // ProductLevel::truncate();
+    // Product::truncate();
 
-    Tax::truncate();
-    Unit::truncate();
-    SubCategory::truncate();
-    Category::truncate();
+    // Tax::truncate();
+    // Unit::truncate();
+    // SubCategory::truncate();
+    // Category::truncate();
 
-    Branch::truncate();
-    Division::truncate();
-    User::truncate();
+    // Branch::truncate();
+    // Division::truncate();
+    // User::truncate();
 
     $userQt = 50;
     $divisionQt = 10;

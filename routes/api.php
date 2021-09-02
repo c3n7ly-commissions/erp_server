@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+  Route::get('auth/show', [AuthController::class, 'show'])->name('auth.show');
 
   // =================================================================
   // company

@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
   /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\User  $user
+   * @return \Illuminate\Http\Response
+   */
+  public function show(Request $request)
+  {
+    $user = $request->user();
+    $user = User::findOrFail($user->id);
+
+    // dd($user);
+    return response($user, 201);
+  }
+
+  /**
    * Register a new user
    *
    * @param  \Illuminate\Http\Request  $request

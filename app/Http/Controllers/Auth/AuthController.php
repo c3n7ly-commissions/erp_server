@@ -18,13 +18,11 @@ class AuthController extends Controller
   public function show(Request $request)
   {
     $user = $request->user();
-    $user = User::findOrFail($user->id);
 
-    // dd($user);
     return response($user, 201);
   }
 
-  /**
+  /*
    * Register a new user
    *
    * @param  \Illuminate\Http\Request  $request

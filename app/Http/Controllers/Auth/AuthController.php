@@ -19,7 +19,7 @@ class AuthController extends Controller
   {
     $user = $request->user();
 
-    return response($user, 201);
+    return response($user, 200);
   }
 
   /*

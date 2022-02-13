@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
   /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\User  $user
+   * @return \Illuminate\Http\Response
+   */
+  public function show(Request $request)
+  {
+    $user = $request->user();
+
+    return response($user, 200);
+  }
+
+  /*
    * Register a new user
    *
    * @param  \Illuminate\Http\Request  $request

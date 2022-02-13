@@ -163,6 +163,7 @@ class DivisionProductController extends ApiController
    */
   public function destroy(Division $division, Product $product)
   {
+    // TODO: Delete image too
     $this->checkRelationship($division, $product);
 
     $product->delete();
